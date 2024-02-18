@@ -1,5 +1,6 @@
 package com.example.springboot3jpa.domain.member;
 
+import com.example.springboot3jpa.domain.shared.MemberRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -38,6 +39,7 @@ public class MemberAggregate {
     @Column(columnDefinition = "TEXT")
     private String introduction;
 
+    private MemberRole role;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Follower> followers;
@@ -72,4 +74,5 @@ public class MemberAggregate {
     public boolean equals(Object obj) {
         return this.hashCode() == obj.hashCode() && obj instanceof MemberAggregate;
     }
+
 }

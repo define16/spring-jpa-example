@@ -22,8 +22,8 @@ dependencies {
 	implementation 'mysql:mysql-connector-java:8.0.21'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-web'  // 톰캣, 웹개발에 필요한 패키지가 있다.
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
 	implementation 'org.springframework.boot:spring-boot-starter-security' // password 암호화를 위해 추가
 
 	// Junit으로 레포지토리만 따로 테스트 가능
