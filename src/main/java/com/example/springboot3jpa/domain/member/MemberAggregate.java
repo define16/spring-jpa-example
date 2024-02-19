@@ -52,17 +52,19 @@ public class MemberAggregate {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    public MemberAggregate(String userId, String userName, String passwordValue, String introduction){
+    public MemberAggregate(String userId, String userName, String passwordValue, String introduction, MemberRole role){
         this.userId = userId;
         this.userName = userName;
         this.password = Password.builder().value(passwordValue).build();
         this.introduction = introduction;
+        this.role = role;
     }
 
-    public MemberAggregate(String userId, String userName, String passwordValue){
+    public MemberAggregate(String userId, String userName, String passwordValue, MemberRole role){
         this.userId = userId;
         this.userName = userName;
         this.password = Password.builder().value(passwordValue).build();
+        this.role = role;
     }
 
     @Override

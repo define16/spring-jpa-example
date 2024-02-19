@@ -1,4 +1,4 @@
-package com.example.springboot3jpa.config;
+package com.example.springboot3jpa.infrastructure.authentication;
 
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;

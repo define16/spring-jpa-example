@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @SpringBootTest
 public class MemberRepositoryTests {
-    @Autowired
+    @Autowired  // 필드 주입방식
     private MemberRepository memberRepository;
 
     @Test
