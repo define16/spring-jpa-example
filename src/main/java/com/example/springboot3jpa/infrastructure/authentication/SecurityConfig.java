@@ -3,6 +3,8 @@ package com.example.springboot3jpa.infrastructure.authentication;
 import com.example.springboot3jpa.domain.shared.MemberRole;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -62,6 +64,17 @@ public class SecurityConfig {
 //                .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+    }
+
+    @Bean
+    public RoleHierarchy roleHierarchy() {
+
+        RoleHierarchyImpl hierarchy = new RoleHierarchyImpl();
+        hierarchy.setHierarchy(String.format("ROLE_%s > ROLE_%s\n" +
+                "ROLE_%s > ROLE_%s",  MemberRole.ADMIN.name(),  MemberRole.SELLER.name(),
+                MemberRole.ADMIN.name(),  MemberRole.USER.name()));
+
+        return hierarchy;
     }
 
 }

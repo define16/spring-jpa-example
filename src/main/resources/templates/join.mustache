@@ -15,6 +15,7 @@ join page
     <input id="password" type="password" name="password" placeholder="password"/>
     <input id="introduction" type="text" name="introduction" placeholder="introduction"/>
     <input id="role" type="text" name="role" placeholder="role"/>
+    <input type="hidden" id="_csrf" name="_csrf" value="{{_csrf.token}}"/>
     <input type="submit" value="sign up"/>
 </form>
 </body>
