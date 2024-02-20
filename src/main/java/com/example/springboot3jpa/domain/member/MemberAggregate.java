@@ -17,7 +17,6 @@ import java.util.List;
         @Index(name = "idx_userName_userId", columnList = "userName, userId")
 })
 @NoArgsConstructor  // No default constructor for entity
-@AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class MemberAggregate {
     @Id
@@ -50,17 +49,22 @@ public class MemberAggregate {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    public MemberAggregate(String userId, String userName, String passwordValue, String introduction){
+    @Column(length = 50)
+    private String role;
+
+    public MemberAggregate(String userId, String userName, String passwordValue, String introduction, String role){
         this.userId = userId;
         this.userName = userName;
         this.password = Password.builder().value(passwordValue).build();
         this.introduction = introduction;
+        this.role = role;
     }
 
-    public MemberAggregate(String userId, String userName, String passwordValue){
+    public MemberAggregate(String userId, String userName, String passwordValue, String role){
         this.userId = userId;
         this.userName = userName;
         this.password = Password.builder().value(passwordValue).build();
+        this.role = role;
     }
 
     @Override

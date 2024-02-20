@@ -1,5 +1,6 @@
 package com.example.springboot3jpa.domain.member;
 
+import com.example.springboot3jpa.infrastructure.authentication.SecurityConfig;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.*;
@@ -32,7 +33,7 @@ public class Password {
     }
 
     private String encodePassword(final String password) {
-        return new BCryptPasswordEncoder().encode(password);
+        return SecurityConfig.bCryptPasswordEncoder().encode(password);
     }
 
     public boolean isMatched(final String rawPassword) {

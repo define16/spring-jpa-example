@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<MemberAggregate, Long> { // MemberAggregate: mapping class , Integer : primary key
 
+    public Boolean existsByUserId(String userId);
+
     public Optional<MemberAggregate> findById(long id);
     public Optional<MemberAggregate> findByUserId(String userId);
 
