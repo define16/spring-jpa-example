@@ -35,14 +35,16 @@ public class SecurityConfig {
                         .requestMatchers("/seller").hasRole(MemberRole.SELLER.name())
                         .anyRequest().authenticated()
 
-                ).formLogin((auth) ->
-                        auth.loginPage("/login")  // 커스텀 로그인 페이지를 설정
-                                .loginProcessingUrl("/sign-in")
-                                .usernameParameter("loginId")
-                                .passwordParameter("password")
-                                .permitAll().defaultSuccessUrl("/home"))
+                )
+//                .formLogin((auth) ->
+//                        auth.loginPage("/login")  // 커스텀 로그인 페이지를 설정
+//                                .loginProcessingUrl("/sign-in")
+//                                .usernameParameter("loginId")
+//                                .passwordParameter("password")
+//                                .permitAll().defaultSuccessUrl("/home"))
+                .httpBasic(Customizer.withDefaults()) // http basic 방식으로 로그인 (팝업창)
+
                 .logout(auth -> auth.logoutUrl("/logout")) // logout시
-                .httpBasic(Customizer.withDefaults())
 //                .csrf((auth) -> auth.disable())
                 .sessionManagement((auth) -> auth.maximumSessions(1) // 다중로그인 개수 1개
                         .maxSessionsPreventsLogin(true) // 초과시 새로운 로그인 차단
