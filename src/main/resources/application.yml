@@ -13,3 +13,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+
+server:
+  servlet:
+    session:
+      timeout: 1800 # 초기반

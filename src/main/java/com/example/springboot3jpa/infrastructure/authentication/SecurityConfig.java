@@ -28,7 +28,7 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-                        .requestMatchers("/", "/login", "/join", "/sign-in", "/sign-up").permitAll());
+                        .requestMatchers("/", "/login", "/join", "/sign-in", "/sign-up", "/home").permitAll());
 
         http
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
@@ -36,13 +36,16 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
 
                 ).formLogin((auth) ->
-                        auth.loginPage("/login")
+                        auth.loginPage("/login")  // 커스텀 로그인 페이지를 설정
                                 .loginProcessingUrl("/sign-in")
                                 .usernameParameter("loginId")
                                 .passwordParameter("password")
-                                .permitAll())  // 커스텀 로그인 페이지를 설정
+                                .permitAll().defaultSuccessUrl("/home"))
                 .httpBasic(Customizer.withDefaults())
-                .csrf((auth) -> auth.disable());
+                .csrf((auth) -> auth.disable())
+                .sessionManagement((auth) -> auth.maximumSessions(1) // 다중로그인 개수 1개
+                        .maxSessionsPreventsLogin(true) // 초과시 새로운 로그인 차단
+                ).sessionManagement((auth) -> auth.sessionFixation().changeSessionId());
 
         // api token으로
 //        http
