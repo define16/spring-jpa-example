@@ -52,17 +52,6 @@ public class SecurityConfig {
                         .maxSessionsPreventsLogin(true) // 초과시 새로운 로그인 차단
                 ).sessionManagement((auth) -> auth.sessionFixation().changeSessionId());
 
-        // api token으로
-//        http
-//                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
-//                        .requestMatchers("/api/**").permitAll()
-//                        .anyRequest().authenticated())
-//                .httpBasic(Customizer.withDefaults())
-//                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
-//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // session을 사용하지 않음
-//                )
-//                .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 
