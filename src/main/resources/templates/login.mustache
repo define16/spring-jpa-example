@@ -13,6 +13,7 @@ login page
 <form action="/sign-in" method="post" name="loginForm">
     <input id="loginId" type="text" name="loginId" placeholder="id"/>
     <input id="password" type="password" name="password" placeholder="password"/>
+    <input type="hidden" id="_csrf" name="_csrf" value="{{_csrf.token}}"/>
     <input type="submit" value="login"/>
 </form>
 </body>

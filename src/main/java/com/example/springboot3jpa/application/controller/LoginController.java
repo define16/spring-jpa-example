@@ -2,10 +2,13 @@ package com.example.springboot3jpa.application.controller;
 
 import com.example.springboot3jpa.application.requests.MemberRequestModels;
 import com.example.springboot3jpa.application.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -61,5 +64,14 @@ public class LoginController {
         MemberRequestModels.Response result = memberService.signUp(request);
         responseBody.put("message", result.getMessage());
         return responseBody;
+    }
+
+    @GetMapping("/logout")  // GET방식으로 logout을 할 수 있다.
+    public String logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication != null) {
+            new SecurityContextLogoutHandler().logout(request, response, authentication);
+        }
+        return "redirect:/login";
     }
 }

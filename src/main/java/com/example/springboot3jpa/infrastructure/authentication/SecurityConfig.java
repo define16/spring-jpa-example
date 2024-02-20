@@ -41,8 +41,9 @@ public class SecurityConfig {
                                 .usernameParameter("loginId")
                                 .passwordParameter("password")
                                 .permitAll().defaultSuccessUrl("/home"))
+                .logout(auth -> auth.logoutUrl("/logout")) // logout시
                 .httpBasic(Customizer.withDefaults())
-                .csrf((auth) -> auth.disable())
+//                .csrf((auth) -> auth.disable())
                 .sessionManagement((auth) -> auth.maximumSessions(1) // 다중로그인 개수 1개
                         .maxSessionsPreventsLogin(true) // 초과시 새로운 로그인 차단
                 ).sessionManagement((auth) -> auth.sessionFixation().changeSessionId());
