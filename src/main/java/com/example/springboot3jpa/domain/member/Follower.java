@@ -1,28 +1,28 @@
 package com.example.springboot3jpa.domain.member;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @Entity(name="follower")
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class Follower {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private final String userId;
+    @NonNull
+    private String userId;
 
     @Column
     @NonNull
     private String userName;
 
     @ManyToOne
+    @JoinColumn(name = "member_id")
     private MemberAggregate member;
 
 }

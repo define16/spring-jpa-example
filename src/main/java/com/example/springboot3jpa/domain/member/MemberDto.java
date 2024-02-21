@@ -18,4 +18,14 @@ public class MemberDto {
             return new MemberAggregate(userId, userName, password, introduction, role);
         }
     }
+
+    @Builder
+    public static class Follow {
+        private String userId;
+        private String userName;
+
+        public Follower toEntity(){
+            return new Follower(userId, userName);
+        }
+    }
 }

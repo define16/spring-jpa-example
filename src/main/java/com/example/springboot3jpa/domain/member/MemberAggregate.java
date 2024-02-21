@@ -7,7 +7,10 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -39,7 +42,7 @@ public class MemberAggregate {
 
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
-    private List<Follower> followers;
+    private Set<Follower> followers = new HashSet<>();
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
@@ -75,5 +78,11 @@ public class MemberAggregate {
     @Override
     public boolean equals(Object obj) {
         return this.hashCode() == obj.hashCode() && obj instanceof MemberAggregate;
+    }
+
+
+    public void addFollower(Follower follower) {
+        follower.setMember(this);
+        followers.add(follower);
     }
 }
