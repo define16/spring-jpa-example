@@ -78,6 +78,7 @@ public class MemberRepositoryTests {
         this.memberRepository.save(memberAggregate);
         String followerUseId1 = UUID.randomUUID().toString();
         Follower follower = MemberDto.Follow.builder().userId(followerUseId1).userName("follower1").build().toEntity();
+        // transactionManager는 Spring 프레임워크에서 트랜잭션을 관리하기 위해 사용되는 bean이다.
         TransactionTemplate transactionTemplate = new TransactionTemplate((PlatformTransactionManager) transactionManager);
         transactionTemplate.execute(status -> {
             Optional<MemberAggregate> saved = memberRepository.findByUserId(useId1);
