@@ -36,6 +36,9 @@ dependencies {
 	// mustache 사용을 위해 추가한다.
 	implementation 'org.springframework.boot:spring-boot-starter-mustache'
 
+	//http 요청
+	implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 }
 
 tasks.named('test') {

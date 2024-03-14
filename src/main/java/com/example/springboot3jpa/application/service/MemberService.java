@@ -6,6 +6,8 @@ import com.example.springboot3jpa.domain.member.MemberDto;
 import com.example.springboot3jpa.domain.shared.MemberRole;
 import com.example.springboot3jpa.infrastructure.repositorty.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -41,5 +43,11 @@ public class MemberService {
         memberRepository.save(memberAggregate);
 
         return MemberRequestModels.Response.builder().isSuccess(true).message("성공").build();
+    }
+
+    public Page<MemberAggregate> retrieveMembers(int page) {
+        int pageSize = 10;
+        PageRequest pageRequest = PageRequest.of(page, pageSize);
+        return memberRepository.findAll(pageRequest);
     }
 }
